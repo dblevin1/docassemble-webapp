@@ -277,6 +277,22 @@ if sys.version_info < (3, 9):
 else:
     install_requires.append("docassemble-backports==1.0")
 
+for item in install_requires:
+    if 'docassemble.demo' in item:
+        install_requires.remove(item)
+        break
+
+doc_base = None
+for item in install_requires:
+    if 'docassemble.base' in item:
+        doc_base = item
+        install_requires.remove(item)
+        break
+if doc_base:
+    newitem_version = doc_base.split('==')[1]
+    install_requires.append(
+        f"docassemble.base @ git+https://github.com/dblevin1/docassemble-base#egg=docassemble.base-{newitem_version}")
+
 setup(name='docassemble.webapp',
       version='1.4.51',
       python_requires='>=3.8',

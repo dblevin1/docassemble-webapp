@@ -29983,7 +29983,50 @@ def da_send_fax(fax_number, the_file, config, country=None):
     )
     return fax.sid
 
-
+def write_pip_conf():
+    pipconf_file = '/var/www/.pip/pip.conf'
+    pip_urls = list(daconfig.get('pip urls', ['https://pypi.org/simple']))
+    logmessage(f"got config {pip_urls=}")
+    has_default_pip = False
+    for pip_url in pip_urls:
+        if 'pypi.org' in pip_url:
+            has_default_pip = True
+    if not has_default_pip:
+        pip_urls.append('https://pypi.org/simple')
+    index_url_str = f"index-url = { pip_urls[0] }"
+    trusted_host_str = f"trusted-host = "
+    extra_index_url_str = f"extra-index-url = "
+    extra_urls = set()
+    trusted_hosts = set()
+    trusted_hosts.add('pypi.org')
+    logmessage(f"setting urls {pip_urls=}")
+    for idx, pip_url in enumerate(pip_urls):
+        if idx == 0:
+            index_url_str = f"index-url = { pip_url }"
+        else:
+            extra_urls.add(pip_url)
+        url_hostname = urlparse(pip_url).netloc
+        if '@' in url_hostname:
+            url_hostname = url_hostname.split('@')[1]
+        trusted_hosts.add(url_hostname)
+    if len(extra_urls) > 0:
+        trusted_host_str += "\n               ".join(trusted_hosts)
+        extra_index_url_str += "\n                  ".join(extra_urls)
+    else:
+        extra_index_url_str = ''
+    
+    content = """\
+[global]
+""" + index_url_str + """
+""" + extra_index_url_str + """
+""" + trusted_host_str + """
+"""
+    with open(pipconf_file, 'w', encoding='utf-8') as fp:
+        logmessage(f"Writing new contents: {content}")
+        fp.write(content)
+    os.chmod(pipconf_file, stat.S_IRUSR | stat.S_IWUSR)
+        
+    
 def write_pypirc():
     pypirc_file = daconfig.get('pypirc path', '/var/www/.pypirc')
     # pypi_username = daconfig.get('pypi username', None)
@@ -30912,6 +30955,7 @@ def initialize():
                     logmessage("There was an error copying the playground modules: " + err.__class__.__name__)
                 write_pypirc()
                 release_lock('init' + hostname, 'init')
+            write_pip_conf()
             try:
                 macro_path = daconfig.get('libreoffice macro file', '/var/www/.config/libreoffice/4/user/basic/Standard/Module1.xba')
                 if os.path.isfile(macro_path) and os.path.getsize(macro_path) != 7167:

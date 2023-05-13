@@ -29987,12 +29987,12 @@ def write_pip_conf():
     pipconf_file = '/var/www/.pip/pip.conf'
     pip_urls = list(daconfig.get('pip urls', ['https://pypi.org/simple']))
     logmessage(f"got config {pip_urls=}")
-    has_default_pip = False
-    for pip_url in pip_urls:
-        if 'pypi.org' in pip_url:
-            has_default_pip = True
-    if not has_default_pip:
-        pip_urls.append('https://pypi.org/simple')
+    #has_default_pip = False
+    #for pip_url in pip_urls:
+    #    if 'pypi.org' in pip_url:
+    #        has_default_pip = True
+    #if not has_default_pip:
+    #    pip_urls.append('https://pypi.org/simple')
     index_url_str = f"index-url = { pip_urls[0] }"
     trusted_host_str = f"trusted-host = "
     extra_index_url_str = f"extra-index-url = "

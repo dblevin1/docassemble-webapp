@@ -29998,7 +29998,7 @@ def write_pip_conf():
     extra_index_url_str = f"extra-index-url = "
     extra_urls = set()
     trusted_hosts = set()
-    trusted_hosts.add('pypi.org')
+    #trusted_hosts.add('pypi.org')
     logmessage(f"setting urls {pip_urls=}")
     for idx, pip_url in enumerate(pip_urls):
         if idx == 0:
@@ -30009,8 +30009,9 @@ def write_pip_conf():
         if '@' in url_hostname:
             url_hostname = url_hostname.split('@')[1]
         trusted_hosts.add(url_hostname)
+    
+    trusted_host_str += "\n               ".join(trusted_hosts)
     if len(extra_urls) > 0:
-        trusted_host_str += "\n               ".join(trusted_hosts)
         extra_index_url_str += "\n                  ".join(extra_urls)
     else:
         extra_index_url_str = ''
@@ -30018,8 +30019,8 @@ def write_pip_conf():
     content = """\
 [global]
 """ + index_url_str + """
-""" + extra_index_url_str + """
 """ + trusted_host_str + """
+""" + extra_index_url_str + """
 """
     with open(pipconf_file, 'w', encoding='utf-8') as fp:
         logmessage(f"Writing new contents: {content}")

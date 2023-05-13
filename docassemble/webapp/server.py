@@ -3575,7 +3575,15 @@ def get_package_info():
             if package.name == 'docassemble.webapp':
                 can_uninstall = False
                 can_update = is_admin
-            package_list.append(Object(package=package, can_update=can_update, can_uninstall=can_uninstall))
+            available_package_version = ''
+            if can_update:
+                dw_status = pypi_status(package.name)
+                if not dw_status['error'] and 'info' in dw_status and 'info' in dw_status['info'] and 'version' in dw_status['info']['info']:
+                    if dw_status['info']['info']['version'] != str(package.packageversion):
+                        available_package_version = ' <span class="badge bg-success">' + dw_status['info']['info']['version'] + '</span> ' + word("Available")
+                #else:
+                #    available_package_version = '<span class="badge bg-warning">failed</span>'
+            package_list.append(Object(package=package, can_update=can_update, can_uninstall=can_uninstall, available_package_version=Markup(available_package_version)))
     return package_list, package_auth
 
 
@@ -29986,7 +29994,7 @@ def da_send_fax(fax_number, the_file, config, country=None):
 def write_pip_conf():
     pipconf_file = '/var/www/.pip/pip.conf'
     pip_urls = list(daconfig.get('pip urls', ['https://pypi.org/simple']))
-    logmessage(f"got config {pip_urls=}")
+    #logmessage(f"got config {pip_urls=}")
     #has_default_pip = False
     #for pip_url in pip_urls:
     #    if 'pypi.org' in pip_url:
@@ -29999,7 +30007,7 @@ def write_pip_conf():
     extra_urls = set()
     trusted_hosts = set()
     #trusted_hosts.add('pypi.org')
-    logmessage(f"setting urls {pip_urls=}")
+    #logmessage(f"setting urls {pip_urls=}")
     for idx, pip_url in enumerate(pip_urls):
         if idx == 0:
             index_url_str = f"index-url = { pip_url }"
@@ -30023,7 +30031,7 @@ def write_pip_conf():
 """ + extra_index_url_str + """
 """
     with open(pipconf_file, 'w', encoding='utf-8') as fp:
-        logmessage(f"Writing new contents: {content}")
+        #logmessage(f"Writing new contents: {content}")
         fp.write(content)
     os.chmod(pipconf_file, stat.S_IRUSR | stat.S_IWUSR)
         

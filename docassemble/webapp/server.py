@@ -3576,7 +3576,7 @@ def get_package_info():
                 can_uninstall = False
                 can_update = is_admin
             available_package_version = ''
-            if can_update:
+            if can_update and 'docassemble' in package.name:
                 dw_status = pypi_status(package.name)
                 if not dw_status['error'] and 'info' in dw_status and 'info' in dw_status['info'] and 'version' in dw_status['info']['info']:
                     if dw_status['info']['info']['version'] != str(package.packageversion):

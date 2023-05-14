@@ -30976,6 +30976,8 @@ def initialize():
                 logmessage("Error was " + err.__class__.__name__ + ' ' + str(err))
             fix_api_keys()
             import_necessary(url, url_root)
+    logmessage('Server Initialized')
+    print('Server Initialized')
 
 initialize()
 

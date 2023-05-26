@@ -294,7 +294,7 @@ if doc_base:
         f"docassemble.base @ git+https://github.com/dblevin1/docassemble-base#egg=docassemble.base-{newitem_version}")
 
 setup(name='docassemble.webapp',
-      version='1.4.52.2',
+      version='1.4.52.3',
       python_requires='>=3.8',
       description=('The web application components of the docassemble system.'),
       long_description=read("README.md"),

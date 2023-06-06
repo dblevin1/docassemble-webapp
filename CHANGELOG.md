@@ -1,6 +1,14 @@
 # Changelog
 
 <!-- insertion marker -->
+## [v1.4.55.2](https://github.com/dblevin1/docassemble-webapp/releases/tag/v1.4.55.2) - 2023-06-06
+
+<small>[Compare with v1.4.55.1](https://github.com/dblevin1/docassemble-webapp/compare/v1.4.55.1...v1.4.55.2)</small>
+
+### Added
+
+- add log message to index for debugging ([3170162](https://github.com/dblevin1/docassemble-webapp/commit/31701624f8f3d4e875ac72fc3f5baeebf694e1e3) by Daniel Blevins).
+
 ## [v1.4.55.1](https://github.com/dblevin1/docassemble-webapp/releases/tag/v1.4.55.1) - 2023-05-30
 
 <small>[Compare with v1.4.52.3](https://github.com/dblevin1/docassemble-webapp/compare/v1.4.52.3...v1.4.55.1)</small>

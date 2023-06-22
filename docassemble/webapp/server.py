@@ -6527,7 +6527,6 @@ def update_current_info_with_session_info(the_current_info, session_info):
 
 @app.route(index_path, methods=['POST', 'GET'])
 def index(action_argument=None, refer=None):
-    logmessage(f'Got index call:{action_argument=} {request.method=} {request.form=} {request.args=} {request.cookies=}')
     # if refer is None and request.method == 'GET':
     #    setup_translation()
     is_ajax = bool(request.method == 'POST' and 'ajax' in request.form and int(request.form['ajax']))

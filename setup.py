@@ -10,9 +10,9 @@ setup_requires = [
     'enum34==1.1.10'
     ]
 install_requires = [
-    'docassemble==1.4.55',
-    'docassemble.base==1.4.55',
-    'docassemble.demo==1.4.55',
+    'docassemble==1.4.61',
+    'docassemble.base==1.4.61',
+    'docassemble.demo==1.4.61',
     "3to2==1.1.1",
     "airtable-python-wrapper==0.15.3",
     "alembic==1.9.2",
@@ -209,7 +209,7 @@ install_requires = [
     "regex==2022.10.31",
     "reportlab==3.6.13",
     "repoze.lru==0.7",
-    "requests==2.28.2",
+    "requests==2.31.0",
     "requests-oauthlib==1.3.1",
     "requests-toolbelt==0.10.1",
     "retry-decorator==1.1.1",
@@ -293,7 +293,7 @@ if doc_base:
         f"docassemble.base @ git+https://github.com/dblevin1/docassemble-base#egg=docassemble.base-{newitem_version}")
 
 setup(name='docassemble.webapp',
-      version='1.4.55.3',
+      version='1.4.61',
       python_requires='>=3.9',
       description=('The web application components of the docassemble system.'),
       long_description=read("README.md"),

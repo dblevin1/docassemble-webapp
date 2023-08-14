@@ -1,6 +1,18 @@
 # Changelog
 
 <!-- insertion marker -->
+## [v1.4.61.3](https://github.com/dblevin1/docassemble-webapp/releases/tag/v1.4.61.3) - 2023-08-14
+
+<small>[Compare with v1.4.61.2](https://github.com/dblevin1/docassemble-webapp/compare/v1.4.61.2...v1.4.61.3)</small>
+
+### Fixed
+
+- fix file access db getters ([832b332](https://github.com/dblevin1/docassemble-webapp/commit/832b3329b9e11a80e98861e91d725daba89a649c) by Daniel Blevins).
+
+## [v1.4.61.2](https://github.com/dblevin1/docassemble-webapp/releases/tag/v1.4.61.2) - 2023-06-23
+
+<small>[Compare with v1.4.61.1](https://github.com/dblevin1/docassemble-webapp/compare/v1.4.61.1...v1.4.61.2)</small>
+
 ## [v1.4.61.1](https://github.com/dblevin1/docassemble-webapp/releases/tag/v1.4.61.1) - 2023-06-21
 
 <small>[Compare with v1.4.55.3](https://github.com/dblevin1/docassemble-webapp/compare/v1.4.55.3...v1.4.61.1)</small>
